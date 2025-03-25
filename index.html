@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .calculator {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .calculator input {
+            width: 100px;
+            margin: 5px;
+        }
+        .calculator button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculadora</h1>
+        <input type="number" id="num1" placeholder="Número 1">
+        <input type="number" id="num2" placeholder="Número 2">
+        <br>
+        <button onclick="calculate('add')">Sumar</button>
+        <button onclick="calculate('subtract')">Restar</button>
+        <button onclick="calculate('multiply')">Multiplicar</button>
+        <button onclick="calculate('divide')">Dividir</button>
+        <h2 id="result">Resultado: </h2>
+    </div>
+
+    <script type="module">
+        import Calculator from './calculator.js';
+
+        const calculator = new Calculator();
+
+        function calculate(operation) {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            let result;
+
+            try {
+                switch (operation) {
+                    case 'add':
+                        result = calculator.add(num1, num2);
+                        break;
+                    case 'subtract':
+                        result = calculator.subtract(num1, num2);
+                        break;
+                    case 'multiply':
+                        result = calculator.multiply(num1, num2);
+                        break;
+                    case 'divide':
+                        result = calculator.divide(num1, num2);
+                        break;
+                }
+                document.getElementById('result').innerText = `Resultado: ${result}`;
+            } catch (error) {
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
